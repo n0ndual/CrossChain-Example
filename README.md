@@ -1,6 +1,7 @@
 # 跨链Token小例子
 
 部署在InkNetwork上的Chaincode中的token和Eth上的token可以互相转换，保持token的总量固定，兑换价格是1：1
+
 实现包括三部分：ETH上一个合约，InkNetwork上一个合约，一个Dapp
 
 ## ETH上的合约：
@@ -10,12 +11,6 @@ contract tokenEth{
 
     address public issuer
     ...
-
-    function totalSupply() constant returns (uint totalSupply);
-    function availableSupply() constant returns (uint balance);
-    function balanceOf(address _owner) constant returns (uint balance)
-    function outerBalanceOf() constant returns (uint balance)
-
 
     function transferFromInkNetwork(address _ethAccount, uint256 number) public {
         require(msg.sender == issuer)
@@ -50,7 +45,7 @@ contract tokenInk{
 
 ## Dapp
 
-部署一个Dapp，监听某一个链的合约的token转移事件，并发起向另一个链的交易请求。
+部署一个Dapp，监听某一个链的合约的token转移事件，然后发起向另一个链的交易请求。
 
 * 用户A调用eth上的合约tokenEth的TransferToInkNetwork接口，转移100个token到InkNetwork上
 
